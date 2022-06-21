@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 
 const { readFile } = require('./helpers/readWriteFile');
+const findById = require('./middlewares/findById');
 // const { validate } = require('../middlewares/validation');
 
 const app = express();
@@ -16,6 +17,8 @@ app.get('/talker', async (_req, res) => {
 
   res.status(HTTP_OK_STATUS).json(talker);
 });
+
+app.get('/talker/:id', findById);
 
 // não remova esse endpoint, e para o avaliador funcionar
 app.get('/', (_request, response) => {
