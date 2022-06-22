@@ -5,7 +5,7 @@ const { readFile } = require('./helpers/readWriteFile');
 const findById = require('./middlewares/findById');
 const login = require('./middlewares/login');
 const tokenValidate = require('./middlewares/tokenValidate');
-const { talkerValidate, addTalker, editTalker } = require('./middlewares/talker');
+const { talkerValidate, addTalker, editTalker, removeTalker } = require('./middlewares/talker');
 
 const app = express();
 app.use(bodyParser.json());
@@ -27,6 +27,8 @@ app.post('/login', login);
 app.post('/talker', tokenValidate, talkerValidate, addTalker);
 
 app.put('/talker/:id', tokenValidate, talkerValidate, editTalker);
+
+app.delete('/talker/:id', tokenValidate, removeTalker);
 
 // não remova esse endpoint, e para o avaliador funcionar
 app.get('/', (_request, response) => {

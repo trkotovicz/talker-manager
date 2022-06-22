@@ -6,6 +6,5 @@ function token(length) {
   }
   return string;
 }
-console.log(token(12));
 
 module.exports = token;

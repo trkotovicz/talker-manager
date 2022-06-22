@@ -6,7 +6,7 @@ const readFile = async (path) => {
 
     return JSON.parse(content);
   } catch (error) {
-    return null;
+    console.log(error.message);
   }
 };
 
@@ -20,11 +20,19 @@ const writeFile = async (path, content) => {
     return content;
   } catch (error) {
     console.log(error.message);
-    return null;
+  }
+};
+
+const removeFileContent = async (path, content) => {
+  try {
+    await fs.writeFile(path, JSON.stringify(content));
+  } catch (error) {
+    console.log(error.message);
   }
 };
 
 module.exports = {
   readFile,
   writeFile,
+  removeFileContent,
 };
