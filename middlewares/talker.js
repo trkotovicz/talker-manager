@@ -24,13 +24,13 @@ function talkerValidate(req, res, next) {
 async function addTalker(req, res) {
   try {
     const { name, age, talk: { watchedAt, rate } } = req.body;
-  
+
     const talkers = await readFile(PATH);
   
     const newTalk = {
-      id: talkers.length + 1,
       name,
       age,
+      id: talkers.length + 1,
       talk: { watchedAt, rate },
     };
     
@@ -42,4 +42,23 @@ async function addTalker(req, res) {
   }
 }
 
-module.exports = { talkerValidate, addTalker };
+async function editTalker(req, res, next) {
+  try {
+    const { name, age, talk: { watchedAt, rate } } = req.body;
+    const { id } = req.params;
+  
+    const talkers = await readFile(PATH);
+    const findById = talkers.findIndex((talker) => talker.id === +id);
+
+    const editTalk = { ...talkers[findById], name, age, talk: { watchedAt, rate } };
+
+    await writeFile(PATH, editTalk);
+
+    return res.status(200).json(editTalk);
+  } catch (error) {
+    console.log(error.message);
+  }
+  next();  
+}
+
+module.exports = { talkerValidate, addTalker, editTalker };

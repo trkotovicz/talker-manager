@@ -23,7 +23,7 @@ function talkValidate(talk, res) {
   if (!talk.watchedAt) {
     return res.status(400).json({ message: 'O campo "watchedAt" é obrigatório' });
   }
-  if (!talk.rate) {
+  if (!talk.rate && talk.rate !== 0) {
     return res.status(400).json({ message: 'O campo "rate" é obrigatório' });
   }
 }
