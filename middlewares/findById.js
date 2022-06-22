@@ -1,6 +1,6 @@
 const { readFile } = require('../helpers/readWriteFile');
 
-const PATH = './talker.json';
+const PATH = 'talker.json';
 
 async function findById(req, res) {
   const { id } = req.params;
