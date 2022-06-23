@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const { readFile } = require('./helpers/readWriteFile');
 const findById = require('./middlewares/findById');
 const login = require('./middlewares/login');
+const searchName = require('./middlewares/searchName');
 const tokenValidate = require('./middlewares/tokenValidate');
 const { talkerValidate, addTalker, editTalker, removeTalker } = require('./middlewares/talker');
 
@@ -19,6 +20,8 @@ app.get('/talker', async (_req, res) => {
 
   res.status(HTTP_OK_STATUS).json(talker);
 });
+
+app.get('/talker/search', tokenValidate, searchName);
 
 app.get('/talker/:id', findById);
 
