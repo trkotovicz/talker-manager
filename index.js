@@ -17,7 +17,6 @@ const PATH = './talker.json';
 
 app.get('/talker', async (_req, res) => {
   const talker = await readFile(PATH) || [];
-
   res.status(HTTP_OK_STATUS).json(talker);
 });
 
