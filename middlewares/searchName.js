@@ -3,12 +3,12 @@ const { readFile } = require('../helpers/readWriteFile');
 const PATH = 'talker.json';
 
 async function searchName(req, res) {
-  const { q } = req.query;
+  const { query } = req.query;
   const talkers = await readFile(PATH);
 
-  if (!q) return res.status(200).json(talkers);
+  if (!query) return res.status(200).json(talkers);
   
-  const searchTalker = talkers.filter((talker) => talker.name.includes(q));
+  const searchTalker = talkers.filter((talker) => talker.name.includes(query));
 
   return res.status(200).json(searchTalker);
 }
